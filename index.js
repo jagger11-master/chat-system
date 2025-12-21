@@ -15,12 +15,11 @@ const userRoutes = require('./Routes/user');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
 app.use(cors({
      origin: [
           'http://localhost:5173',
           'http://localhost:3000',
-          'https://chat-system-nuadorlu8-emmanuel-daud.vercel.app' 
+          'https://chat-system-lyart.vercel.app'  
      ],
      credentials: true
 }));
