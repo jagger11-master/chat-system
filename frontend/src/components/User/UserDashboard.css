@@ -1,0 +1,147 @@
+/* src/components/User/UserDashboard.css */
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--gray-50);
+}
+
+.dashboard-sidebar {
+  width: 280px;
+  background: white;
+  border-right: 1px solid var(--gray-200);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.sidebar-header {
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.user-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-size: 2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+}
+
+.sidebar-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 0.25rem;
+}
+
+.user-email {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin-bottom: 0.75rem;
+}
+
+.user-badge {
+  display: inline-block;
+  background-color: var(--primary);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.sidebar-nav {
+  flex: 1;
+  padding: 1rem;
+}
+
+.nav-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: none;
+  border: none;
+  border-radius: 0.5rem;
+  color: var(--gray-700);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 0.5rem;
+}
+
+.nav-item:hover {
+  background-color: var(--gray-50);
+}
+
+.nav-item.active {
+  background-color: var(--primary);
+  color: white;
+}
+
+.nav-item svg {
+  flex-shrink: 0;
+}
+
+.logout-btn {
+  margin: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background-color: var(--danger);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.logout-btn:hover {
+  background-color: #dc2626;
+}
+
+.dashboard-content {
+  flex: 1;
+  margin-left: 280px;
+  padding: 2rem;
+}
+
+.content-header {
+  margin-bottom: 2rem;
+}
+
+.content-header h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gray-800);
+  margin-bottom: 0.5rem;
+}
+
+.content-header p {
+  color: var(--gray-600);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-sidebar {
+    width: 100%;
+    position: relative;
+    height: auto;
+  }
+
+  .dashboard-content {
+    margin-left: 0;
+  }
+}
