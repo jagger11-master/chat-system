@@ -1,4 +1,4 @@
-// src/components/User/MyQuestions.jsx
+
 import React, { useState, useEffect } from 'react';
 import { userAPI } from '../../services/api';
 import './Questions.css';
@@ -60,7 +60,7 @@ const MyQuestions = () => {
     <div className="questions-container">
       <div className="content-header">
         <div>
-          <h2>My Questions</h2>
+          <h2>My questions</h2>
           <p>Questions you've asked to admin</p>
         </div>
         <button

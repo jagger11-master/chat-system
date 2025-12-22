@@ -1,4 +1,3 @@
-// src/components/User/UserDashboard.jsx
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import Profile from './Profile';
@@ -8,6 +7,7 @@ import './UserDashboard.css';
 
 const UserDashboard = () => {
   const [activeTab, setActiveTab] = useState('profile');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, logout } = useAuth();
 
   const renderContent = () => {
@@ -23,9 +23,34 @@ const UserDashboard = () => {
     }
   };
 
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setMobileMenuOpen(false); 
+  };
+
   return (
     <div className="dashboard">
-      <div className="dashboard-sidebar">
+      {/*  Menu Toggle Button */}
+      <button 
+        className="dashboard-menu-toggle"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        aria-label="Toggle menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <line x1="3" y1="12" x2="21" y2="12" strokeWidth="2" strokeLinecap="round"/>
+          <line x1="3" y1="6" x2="21" y2="6" strokeWidth="2" strokeLinecap="round"/>
+          <line x1="3" y1="18" x2="21" y2="18" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      </button>
+
+      {/* Overlay */}
+      <div 
+        className={`dashboard-overlay ${mobileMenuOpen ? 'active' : ''}`}
+        onClick={() => setMobileMenuOpen(false)}
+      ></div>
+
+      {/* Sidebar */}
+      <div className={`dashboard-sidebar ${mobileMenuOpen ? 'mobile-open' : ''}`}>
         <div className="sidebar-header">
           <div className="user-avatar">
             {user?.name?.charAt(0).toUpperCase()}
@@ -38,7 +63,7 @@ const UserDashboard = () => {
         <nav className="sidebar-nav">
           <button
             className={`nav-item ${activeTab === 'profile' ? 'active' : ''}`}
-            onClick={() => setActiveTab('profile')}
+            onClick={() => handleTabChange('profile')}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" strokeWidth="2" strokeLinecap="round"/>
@@ -48,7 +73,7 @@ const UserDashboard = () => {
 
           <button
             className={`nav-item ${activeTab === 'questions' ? 'active' : ''}`}
-            onClick={() => setActiveTab('questions')}
+            onClick={() => handleTabChange('questions')}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <circle cx="12" cy="12" r="10" strokeWidth="2"/>
@@ -59,13 +84,13 @@ const UserDashboard = () => {
 
           <button
             className={`nav-item ${activeTab === 'my-questions' ? 'active' : ''}`}
-            onClick={() => setActiveTab('my-questions')}
+            onClick={() => handleTabChange('my-questions')}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" strokeWidth="2" strokeLinecap="round"/>
               <polyline points="14 2 14 8 20 8" strokeWidth="2" strokeLinecap="round"/>
             </svg>
-            <span>My Questions</span>
+            <span>My questions</span>
           </button>
         </nav>
 
@@ -77,6 +102,7 @@ const UserDashboard = () => {
         </button>
       </div>
 
+      {/* Main Content */}
       <div className="dashboard-content">
         {renderContent()}
       </div>

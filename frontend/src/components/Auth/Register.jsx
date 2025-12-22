@@ -1,4 +1,4 @@
-// src/components/Auth/Register.jsx
+
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import './Auth.css';
@@ -131,8 +131,8 @@ const Register = ({ onSwitchToLogin }) => {
               onChange={handleChange}
               className="form-select"
             >
-              <option value="user">Regular User</option>
-              <option value="admin">Administrator</option>
+              <option value="user">User</option>
+              <option value="admin">Admin</option>
             </select>
           </div>
 

@@ -1,4 +1,4 @@
-/* src/components/User/Profile.css */
+
 .profile-container {
   max-width: 900px;
 }
@@ -78,4 +78,74 @@
 
 .form-actions .btn {
   padding: 0.75rem 1.5rem;
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 768px) {
+  .profile-card {
+    padding: 1.5rem;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .card-header h3 {
+    font-size: 1.35rem;
+  }
+
+  .info-row p {
+    font-size: 1rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .profile-card {
+    padding: 1.25rem;
+  }
+
+  .card-header {
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.875rem;
+  }
+
+  .card-header h3 {
+    font-size: 1.2rem;
+  }
+
+  .profile-info {
+    gap: 1.25rem;
+  }
+
+  .info-row label {
+    font-size: 0.8rem;
+  }
+
+  .info-row p {
+    font-size: 0.95rem;
+  }
+
+  .role-badge {
+    padding: 0.4rem 0.875rem;
+    font-size: 0.875rem;
+  }
+
+  .profile-form {
+    gap: 1rem;
+  }
+
+  .form-actions .btn {
+    padding: 0.625rem 1.25rem;
+  }
 }

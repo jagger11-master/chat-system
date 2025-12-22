@@ -1,4 +1,4 @@
-// src/components/Admin/QuestionManagement.jsx
+
 import React, { useState, useEffect } from 'react';
 import { adminAPI, userAPI } from '../../services/api';
 import './QuestionManagement.css';

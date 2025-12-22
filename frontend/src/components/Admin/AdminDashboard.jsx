@@ -1,4 +1,3 @@
-// src/components/Admin/AdminDashboard.jsx
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import UserManagement from './UserManagement';
@@ -7,6 +6,7 @@ import './AdminDashboard.css';
 
 const AdminDashboard = () => {
   const [activeTab, setActiveTab] = useState('users');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, logout } = useAuth();
 
   const renderContent = () => {
@@ -20,22 +20,47 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    setMobileMenuOpen(false); // Close menu on mobile after selection
+  };
+
   return (
     <div className="admin-dashboard">
-      <div className="admin-sidebar">
+      {/* Mobile Menu Toggle Button */}
+      <button 
+        className="admin-menu-toggle"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        aria-label="Toggle menu"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <line x1="3" y1="12" x2="21" y2="12" strokeWidth="2" strokeLinecap="round"/>
+          <line x1="3" y1="6" x2="21" y2="6" strokeWidth="2" strokeLinecap="round"/>
+          <line x1="3" y1="18" x2="21" y2="18" strokeWidth="2" strokeLinecap="round"/>
+        </svg>
+      </button>
+
+      {/* Mobile Overlay */}
+      <div 
+        className={`admin-overlay ${mobileMenuOpen ? 'active' : ''}`}
+        onClick={() => setMobileMenuOpen(false)}
+      ></div>
+
+      {/* Sidebar */}
+      <div className={`admin-sidebar ${mobileMenuOpen ? 'mobile-open' : ''}`}>
         <div className="admin-sidebar-header">
           <div className="admin-avatar">
             {user?.name?.charAt(0).toUpperCase()}
           </div>
           <h3>{user?.name}</h3>
           <p className="admin-email">{user?.email}</p>
-          <span className="admin-badge">Administrator</span>
+          <span className="admin-badge">Admin</span>
         </div>
 
         <nav className="admin-sidebar-nav">
           <button
             className={`admin-nav-item ${activeTab === 'users' ? 'active' : ''}`}
-            onClick={() => setActiveTab('users')}
+            onClick={() => handleTabChange('users')}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" strokeWidth="2" strokeLinecap="round"/>
@@ -45,7 +70,7 @@ const AdminDashboard = () => {
 
           <button
             className={`admin-nav-item ${activeTab === 'questions' ? 'active' : ''}`}
-            onClick={() => setActiveTab('questions')}
+            onClick={() => handleTabChange('questions')}
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <circle cx="12" cy="12" r="10" strokeWidth="2"/>
@@ -63,6 +88,7 @@ const AdminDashboard = () => {
         </button>
       </div>
 
+      {/* Main Content */}
       <div className="admin-content">
         {renderContent()}
       </div>

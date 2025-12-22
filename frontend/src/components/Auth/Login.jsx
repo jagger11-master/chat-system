@@ -1,4 +1,4 @@
-// src/components/Auth/Login.jsx
+
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import './Auth.css';
@@ -89,6 +89,9 @@ const Login = ({ onSwitchToRegister }) => {
               Register here
             </button>
           </p>
+        </div>
+         <div className="auth-copyright">
+          <span className="auth-copyright-text">© 2025,Emmil-Lenz</span>
         </div>
       </div>
     </div>

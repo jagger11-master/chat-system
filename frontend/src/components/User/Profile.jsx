@@ -1,4 +1,4 @@
-// src/components/User/Profile.jsx
+
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { userAPI } from '../../services/api';
@@ -80,7 +80,7 @@ const Profile = () => {
   return (
     <div className="profile-container">
       <div className="content-header">
-        <h2>Profile Settings</h2>
+        <h2>Settings</h2>
         <p>Manage your account information</p>
       </div>
 

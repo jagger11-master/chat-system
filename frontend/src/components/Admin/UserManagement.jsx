@@ -1,4 +1,3 @@
-// src/components/Admin/UserManagement.jsx
 import React, { useState, useEffect } from 'react';
 import { adminAPI } from '../../services/api';
 import './UserManagement.css';
@@ -110,7 +109,7 @@ const UserManagement = () => {
           </div>
           <div className="stat-content">
             <h3>{users.filter(u => u.role === 'admin').length}</h3>
-            <p>Administrators</p>
+            <p>Admin</p>
           </div>
         </div>
 
@@ -122,7 +121,7 @@ const UserManagement = () => {
           </div>
           <div className="stat-content">
             <h3>{users.filter(u => u.role === 'user').length}</h3>
-            <p>Regular Users</p>
+            <p>User</p>
           </div>
         </div>
       </div>

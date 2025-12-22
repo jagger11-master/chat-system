@@ -1,4 +1,4 @@
-// src/components/User/Questions.jsx
+
 import React, { useState, useEffect } from 'react';
 import { userAPI } from '../../services/api';
 import './Questions.css';

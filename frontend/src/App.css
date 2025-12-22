@@ -11,9 +11,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -39,4 +41,40 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Tablet Responsiveness */
+@media (max-width: 768px) {
+  #root {
+    padding: 1.5rem;
+  }
+
+  .logo {
+    height: 5em;
+    padding: 1.25em;
+  }
+
+  .card {
+    padding: 1.5em;
+  }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  #root {
+    padding: 1rem;
+  }
+
+  .logo {
+    height: 4em;
+    padding: 1em;
+  }
+
+  .card {
+    padding: 1.25em;
+  }
+
+  .read-the-docs {
+    font-size: 0.875rem;
+  }
 }
