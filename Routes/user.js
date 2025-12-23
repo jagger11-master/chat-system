@@ -9,11 +9,8 @@ const { auth } = require('../Middleware/Auth');
 // Protect ALL user routes
 router.use(auth);
 
-//  USER PROFILE ROUTES 
-
-/**
- * GET current user's profile
- */
+ // GET current user's profile method
+ 
 router.get('/profile', async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select('-password');
@@ -24,14 +21,14 @@ router.get('/profile', async (req, res) => {
   }
 });
 
-/**
- * UPDATE user profile (name, email)
- */
+
+ //A method in which user updates there  profile (name, email)
+ 
 router.put('/profile', async (req, res) => {
   try {
     const { name, email } = req.body;
     
-    // Check if email is already taken by another user
+    //A condition to check if email is already taken by another user
     if (email) {
       const existingUser = await User.findOne({ 
         email, 
@@ -54,9 +51,8 @@ router.put('/profile', async (req, res) => {
   }
 });
 
-/**
- * CHANGE password
- */
+
+// a method to change  password
 router.put('/change-password', async (req, res) => {
   try {
     const { currentPassword, newPassword } = req.body;
@@ -74,7 +70,7 @@ router.put('/change-password', async (req, res) => {
     }
 
     // Hash and save new password
-    user.password = newPassword; // Will be hashed by pre-save hook in model
+    user.password = newPassword; 
     await user.save();
 
     res.json({ message: 'Password changed successfully' });
@@ -83,28 +79,16 @@ router.put('/change-password', async (req, res) => {
   }
 });
 
-/**
- * GET user's own questions
- */
-router.get('/my-questions', async (req, res) => {
-  try {
-    const questions = await Question.find({ askedBy: req.user.userId })
-      .sort({ createdAt: -1 });
-    res.json(questions);
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to fetch your questions' });
-  }
-});
-
-// ===== EXISTING ROUTES =====
-
-/**
- * 1. GET all questions (asked by admin)
- * User can see questions + admin answers
- */
+ // getting  user's own questions + admin answers
+ // filtered, User only sees questions they created.
+ 
 router.get('/questions', async (req, res) => {
   try {
-    const questions = await Question.find()
+    //check if the logged-in user is an admin or a regular user 
+    //if admin ,filter is empty {}(find all).if user ,filter by their ID
+    const filter = req.user.role == 'admin' ? {} :{askedBy: req.user.userId};
+
+    const questions = await Question.find(filter) 
       .populate('askedBy', 'name role')
       .sort({ createdAt: -1 });
 
@@ -113,10 +97,8 @@ router.get('/questions', async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch questions' });
   }
 });
-
-/**
- * 2. ANSWER a question (User responds)
- */
+//user respond method 
+ 
 router.put('/questions/:id/answer', async (req, res) => {
   try {
     const { answer } = req.body;
@@ -137,9 +119,7 @@ router.put('/questions/:id/answer', async (req, res) => {
   }
 });
 
-/**
- * 3. USER asks a question to Admin
- */
+// User asks a question to Admin method 
 router.post('/ask', async (req, res) => {
   try {
     const { questionText } = req.body;
@@ -156,9 +136,9 @@ router.post('/ask', async (req, res) => {
   }
 });
 
-/**
- * 4. USER sends message to admin
- */
+
+ // User sends message to admin method 
+
 router.post('/message', async (req, res) => {
   try {
     const { text, adminId } = req.body;
